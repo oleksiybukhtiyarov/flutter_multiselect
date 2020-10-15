@@ -5,6 +5,12 @@ import 'package:flutter_multiselect/selection_modal.dart';
 
 class MultiSelect extends FormField<dynamic> {
   final String titleText;
+  final String selectableTitle;
+  final String saveButtonLabel;
+  final String cancelButtonLabel;
+  final String currentlySelectedHint;
+  final String deleteButtonHint;
+  final String searchHint;
   final String hintText;
   final bool required;
   final String errorText;
@@ -25,6 +31,12 @@ class MultiSelect extends FormField<dynamic> {
       List<int> initialValue,
       bool autovalidate = false,
       this.titleText = 'Title',
+      this.selectableTitle = 'Please select one or more',
+      this.saveButtonLabel = 'Save',
+      this.cancelButtonLabel = 'Cancel',
+      this.currentlySelectedHint = 'Currently selected items (tap to remove)',
+      this.deleteButtonHint = 'Tap to delete this item',
+      this.searchHint = "Search...",
       this.hintText = 'Нажмитете для добавления',
       this.required = false,
       this.errorText = 'Выберете сотрудника',
@@ -70,6 +82,12 @@ class MultiSelect extends FormField<dynamic> {
                           builder: (BuildContext context) => SelectionModal(
                               filterable: filterable,
                               valueField: valueField,
+                              title: selectableTitle,
+                              saveButtonLabel: saveButtonLabel,
+                              cancelButtonLabel: cancelButtonLabel,
+                              currentlySelectedHint: currentlySelectedHint,
+                              deleteButtonHint: deleteButtonHint,
+                              searchHint: searchHint,
                               textField: textField,
                               dataSource: dataSource,
                               values: state.value ?? []),

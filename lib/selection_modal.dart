@@ -3,12 +3,17 @@ import 'dart:math' as math;
 
 class SelectionModal extends StatefulWidget {
   @override
-  _SelectionModalState createState() =>
-      _SelectionModalState();
+  _SelectionModalState createState() => _SelectionModalState();
 
   final List dataSource;
   final List values;
   final bool filterable;
+  final String title;
+  final String saveButtonLabel;
+  final String cancelButtonLabel;
+  final String currentlySelectedHint;
+  final String deleteButtonHint;
+  final String searchHint;
   final String textField;
   final String valueField;
 
@@ -16,6 +21,12 @@ class SelectionModal extends StatefulWidget {
       {this.filterable,
       this.dataSource,
       this.values,
+      this.title,
+      this.saveButtonLabel,
+      this.cancelButtonLabel,
+      this.currentlySelectedHint,
+      this.deleteButtonHint,
+      this.searchHint,
       this.textField,
       this.valueField})
       : super();
@@ -71,9 +82,7 @@ class _SelectionModalState extends State<SelectionModal> {
     return AppBar(
       leading: Container(),
       elevation: 0.0,
-      title: Text(
-        'Please select one or more',
-      ),
+      title: Text(widget.title),
       actions: <Widget>[
         IconButton(
           icon: Icon(
@@ -106,7 +115,7 @@ class _SelectionModalState extends State<SelectionModal> {
                   ButtonTheme(
                     height: 50.0,
                     child: RaisedButton.icon(
-                      label: Text('Cancel'),
+                      label: Text(widget.cancelButtonLabel),
                       icon: Icon(
                         Icons.clear,
                         size: 20.0,
@@ -119,12 +128,9 @@ class _SelectionModalState extends State<SelectionModal> {
                   ),
                   ButtonTheme(
                     height: 50.0,
-                    child: RaisedButton.icon(
-                      label: Text('Save'),
-                      icon: Icon(
-                        Icons.save,
-                        size: 20.0,
-                      ),
+                    child: RaisedButton(
+                      child: Text(widget.saveButtonLabel,
+                          textAlign: TextAlign.center),
                       color: Colors.blueAccent,
                       textColor: Colors.white,
                       onPressed: () {
@@ -160,7 +166,7 @@ class _SelectionModalState extends State<SelectionModal> {
           .singleWhere((itm) => itm['value'] == item, orElse: () => null);
       selectedOptions.add(Chip(
         label: Text(existingItem['text'], overflow: TextOverflow.ellipsis),
-        deleteButtonTooltipMessage: 'Tap to delete this item',
+        deleteButtonTooltipMessage: widget.deleteButtonHint,
         deleteIcon: Icon(Icons.cancel),
         deleteIconColor: Colors.grey,
         onDeleted: () {
@@ -178,7 +184,7 @@ class _SelectionModalState extends State<SelectionModal> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 new Text(
-                  'Currently selected items (tap to remove)',
+                  widget.currentlySelectedHint,
                   style: TextStyle(
                       color: Colors.black87, fontWeight: FontWeight.bold),
                 ),
@@ -235,7 +241,7 @@ class _SelectionModalState extends State<SelectionModal> {
                     ),
                   ),
                   filled: true,
-                  hintText: "Search...",
+                  hintText: widget.searchHint,
                   fillColor: Colors.white,
                   suffix: SizedBox(
                       height: 25.0,
