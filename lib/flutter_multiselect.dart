@@ -66,6 +66,7 @@ class MultiSelect extends FormField<dynamic> {
                         orElse: () => null);
                     selectedOptions.add(Chip(
                       label: Text(existingItem[textField],
+                          style: TextStyle(fontFamily: 'SanFrancisco'),
                           overflow: TextOverflow.ellipsis),
                     ));
                   });
@@ -129,7 +130,9 @@ class MultiSelect extends FormField<dynamic> {
                                   child: Text(
                                 titleText,
                                 style: TextStyle(
-                                    fontSize: 14.0, color: Colors.black),
+                                    fontSize: 14.0,
+                                    color: Colors.black,
+                                    fontFamily: 'SanFrancisco'),
                               )),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -159,8 +162,8 @@ class MultiSelect extends FormField<dynamic> {
                                 child: Text(
                                   hintText,
                                   style: TextStyle(
-                                    color: Colors.grey.shade500,
-                                  ),
+                                      color: Colors.grey.shade500,
+                                      fontFamily: 'SanFrancisco'),
                                 ),
                               )
                       ],
